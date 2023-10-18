@@ -4,34 +4,19 @@ const FULL_HEART = '♥'
 
 
 // Your JavaScript code goes here
-// Hides ERROR message
-const error = document.getElementById('modal');
-const hide = () => {error.className = "hidden"};
-const callServer = serverCall(mimicServerCall)
+
+// hide error message
+
+const errorMessage = document.getElementById('modal');
+errorMessage.classList.add('hidden')
 
 
-function setHidden() {
-  return setTimeout(hide, 3000);
-}
-
-
-
-
-
-// fetch server
-function serverCall(url) {
-  fetch(url)
-  .then(() => console.log('did this work?'))
-  .then((response) => response.json())
-  .catch((err) => {
-    const text = document.getElementById("modal").querySelector('h2');
-    text.textContent = err
-    const modalDiv = document.getElementById('modal');
-    modalDiv.removeAttribute('hidden')
-    setHidden();
-  })
-}
-
+fetch(mimicServerCall())
+.then(response => console.log(response))
+.catch(error => {
+  errorMessage.innerText = error.message
+  errorMessage.classList.remove('hidden')
+})
 
 
 
